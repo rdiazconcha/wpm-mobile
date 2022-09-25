@@ -3,6 +3,7 @@
 namespace WisdomPetMedicine.DataAccess;
 public class WpmDbContext : DbContext
 {
+    public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Client> Clients { get; set; }
 

@@ -1,15 +1,21 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using WisdomPetMedicine.DataAccess;
 
 namespace WisdomPetMedicine.ViewModels;
 internal class ProductsViewModel : ViewModelBase
 {
-	private ObservableCollection<Product> products;
+    private readonly WpmDbContext dbContext;
+
+    private ObservableCollection<Product> products;
 
 	public ObservableCollection<Product> Products
 	{
 		get { return products; }
-		set { products = value;
+		set
+		{
+			products = value;
 			RaisePropertyChanged();
 		}
 	}
@@ -19,15 +25,29 @@ internal class ProductsViewModel : ViewModelBase
 	public Product SelectedProduct
 	{
 		get { return selectedProduct; }
-		set { selectedProduct = value;
+		set
+		{
+			selectedProduct = value;
 			RaisePropertyChanged();
 		}
 	}
 
+	public ICommand AddCommand { get; set; }
+
+
 	public ProductsViewModel()
 	{
-		var dbContext = new WpmDbContext();
+		dbContext = new WpmDbContext();
+		dbContext.Categories.Load();
+		AddCommand = new Command(OnAddCommand);
 		Products = new ObservableCollection<Product>(dbContext.Products);
 	}
 
+	private void OnAddCommand()
+	{
+		var nextId = dbContext.Products.Max(p => p.Id) + 1;
+		dbContext.Products.Add(new Product(nextId, Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), 100, 1));
+		dbContext.SaveChanges();
+        Products = new ObservableCollection<Product>(dbContext.Products);
+    }
 }

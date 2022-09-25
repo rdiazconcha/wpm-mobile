@@ -4,21 +4,6 @@
              x:Class="WisdomPetMedicine.Views.ProductsPage"
              xmlns:vm="clr-namespace:WisdomPetMedicine.ViewModels"
              Title="ProductsPage">
-    <ContentPage.BindingContext>
-        <vm:ProductsViewModel />
-    </ContentPage.BindingContext>
+    <VerticalStackLayout x:Name="data" />
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-
-
-        <Button Text="Add" Command="{Binding AddCommand}"  />
-
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Products}" />
-    </Grid>
-    
 </ContentPage>

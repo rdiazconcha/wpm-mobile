@@ -3,12 +3,27 @@
     x:Class="WisdomPetMedicine.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:WisdomPetMedicine"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:views="clr-namespace:WisdomPetMedicine.Views"
+    Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="About"
+        ContentTemplate="{DataTemplate views:AboutPage}"
+        Route="AboutPage" />
+    
+    <FlyoutItem Title="Configuración...">
+        <Tab Title="Totales">
+            <ShellContent
+                Title="Totals"
+                ContentTemplate="{DataTemplate views:TotalsPage}"
+                Route="TotalsPage" />
+
+            <ShellContent
+                Title="Products"
+                ContentTemplate="{DataTemplate views:ProductsPage}"
+                Route="ProductsPage" />
+        </Tab>
+    </FlyoutItem>
+    
 
 </Shell>

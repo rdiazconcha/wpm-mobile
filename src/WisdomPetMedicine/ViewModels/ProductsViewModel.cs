@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WisdomPetMedicine.DataAccess;
+using WisdomPetMedicine.Services;
 
 namespace WisdomPetMedicine.ViewModels;
+
 internal class ProductsViewModel : ViewModelBase
 {
     private readonly WpmDbContext dbContext;
@@ -35,7 +38,7 @@ internal class ProductsViewModel : ViewModelBase
 	public ICommand AddCommand { get; set; }
 
 
-	public ProductsViewModel()
+	public ProductsViewModel(INavigationService navigationService)
 	{
 		dbContext = new WpmDbContext();
 		dbContext.Categories.Load();

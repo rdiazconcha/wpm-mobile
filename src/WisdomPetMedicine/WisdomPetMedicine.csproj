@@ -53,4 +53,10 @@
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Views\ProductsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

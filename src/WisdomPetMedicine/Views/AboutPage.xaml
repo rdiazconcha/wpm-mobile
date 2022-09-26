@@ -5,8 +5,6 @@
              Title="AboutPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            Text="Wisdom Pet Medicine" />
     </VerticalStackLayout>
 </ContentPage>

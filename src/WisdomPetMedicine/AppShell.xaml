@@ -4,26 +4,66 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:WisdomPetMedicine.Views"
+    xmlns:info="clr-namespace:Microsoft.Maui.ApplicationModel;assembly=Microsoft.Maui.Essentials"
+    FlyoutBackdrop="{StaticResource Secondary}"
     Shell.FlyoutBehavior="Flyout">
 
+    <Shell.FlyoutHeader>
+        <Image Source="wpmlogo.png" 
+               WidthRequest="120"
+               Margin="10" />
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout Padding="10">
+            <Label Text="{x:Static info:AppInfo.Name}" />
+            <Label Text="{x:Static info:AppInfo.VersionString}" />
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+    
     <ShellContent
-        Title="About"
+        Title="Acerca de..."
         ContentTemplate="{DataTemplate views:AboutPage}"
         Route="AboutPage" />
-    
+
     <FlyoutItem Title="Configuración...">
+
         <Tab Title="Totales">
             <ShellContent
-                Title="Totals"
+                Title="Totales"
                 ContentTemplate="{DataTemplate views:TotalsPage}"
                 Route="TotalsPage" />
+        </Tab>
 
+        <Tab Title="Categorías">
             <ShellContent
-                Title="Products"
+                Title="Categorías"
+                ContentTemplate="{DataTemplate views:CategoriesPage}"
+                Route="CategoriesPage" />
+        </Tab>
+
+        <Tab Title="Productos">
+            <ShellContent
+                Title="Productos"
                 ContentTemplate="{DataTemplate views:ProductsPage}"
                 Route="ProductsPage" />
         </Tab>
-    </FlyoutItem>
-    
 
+        <Tab Title="Clientes">
+            <ShellContent
+                Title="Clientes"
+                ContentTemplate="{DataTemplate views:ClientsPage}"
+                Route="ClientsPage" />
+        </Tab>
+
+    </FlyoutItem>
+
+    <ShellContent
+        Title="Visitas"
+        ContentTemplate="{DataTemplate views:VisitsPage}"
+        Route="VisitsPage" />
+
+    <MenuItem Text="Abrir página web..."
+              Clicked="MenuItem_Clicked"
+              />
 </Shell>

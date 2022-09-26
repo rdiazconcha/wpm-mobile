@@ -2,14 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WisdomPetMedicine.Views.ProductsPage"
-             xmlns:vm="clr-namespace:WisdomPetMedicine.ViewModels"
-             xmlns:design="http://schemas.microsoft.com/expression/blend/2008"
-             x:DataType="vm:ProductsViewModel"
+             xmlns:handlers="clr-namespace:WisdomPetMedicine.Handlers"
              Title="ProductsPage">
 
-    <CollectionView ItemsSource="{Binding Products}"
-                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-                    SelectionMode="Single"
-                    />
+    <Shell.SearchHandler>
+        <handlers:ProductSearchHandler Placeholder="Buscar productos..."
+                                       DisplayMemberName="Name"
+                                       ShowsResults="True"
+                                       ItemTemplate="{StaticResource ProductDataTemplate}"
+                                       />
+    </Shell.SearchHandler>
 
+    <CollectionView x:Name="products"
+                    SelectionMode="Single"
+                    ItemTemplate="{StaticResource ProductDataTemplate}" />
 </ContentPage>

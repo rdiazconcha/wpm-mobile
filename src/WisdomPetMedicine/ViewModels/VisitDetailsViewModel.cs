@@ -1,14 +1,15 @@
 ﻿namespace WisdomPetMedicine.ViewModels;
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WisdomPetMedicine.DataAccess;
-using WisdomPetMedicine.Models;
 
-public partial class VisitDetailsViewModel : ViewModelBase
+public partial class VisitDetailsViewModel : ViewModelBase, IQueryAttributable
 {
-    public int ClientId { get; set; }
+    [ObservableProperty]
+    int clientId;
 
     [ObservableProperty]
     private ObservableCollection<Product> products;
@@ -25,15 +26,26 @@ public partial class VisitDetailsViewModel : ViewModelBase
 
     public ICommand AddCommand { get; set; }
 
-    public VisitDetailsViewModel()
+    public VisitDetailsViewModel(WpmOutDbContext dbOut)
     {
         var db = new WpmDbContext();
         Products = new ObservableCollection<Product>(db.Products);
+        dbOut.Database.EnsureCreated();
+
+        var allSales = dbOut.Sales.ToList();
 
         AddCommand = new Command(() =>
         {
-            var sale = new Sale(ClientId, SelectedProduct.Id, Quantity);
+
+            var sale = new Sale(ClientId, SelectedProduct.Id, Quantity, Quantity * SelectedProduct.Price);
+            dbOut.Sales.Add(sale);
+            dbOut.SaveChanges();
             Sales.Add(sale);
         }, () => true);
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        ClientId = int.Parse(query["id"].ToString());
     }
 }

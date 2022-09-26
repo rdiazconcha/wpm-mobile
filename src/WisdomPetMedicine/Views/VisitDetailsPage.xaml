@@ -5,10 +5,6 @@
              xmlns:vm="clr-namespace:WisdomPetMedicine.ViewModels"
              Title="VisitDetailsPage">
 
-    <ContentPage.BindingContext>
-        <vm:VisitDetailsViewModel />
-    </ContentPage.BindingContext>
-
     <Grid RowDefinitions="*,Auto,*">
         <Grid ColumnDefinitions="*,*">
             <VerticalStackLayout>

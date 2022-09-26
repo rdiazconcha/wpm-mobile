@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 namespace WisdomPetMedicine;
-internal class ViewModelBase : INotifyPropertyChanged
+public class ViewModelBase : INotifyPropertyChanged
 {
     public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {

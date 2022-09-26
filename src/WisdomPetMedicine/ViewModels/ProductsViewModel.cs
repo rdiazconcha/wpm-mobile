@@ -1,17 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Maui.Controls;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using WisdomPetMedicine.DataAccess;
 using WisdomPetMedicine.Services;
+using WisdomPetMedicine.Views;
 
 namespace WisdomPetMedicine.ViewModels;
 
-internal class ProductsViewModel : ViewModelBase
+public class ProductsViewModel : ViewModelBase
 {
     private readonly WpmDbContext dbContext;
-
-    private ObservableCollection<Product> products;
+	private readonly INavigationService navigationService;
+	private ObservableCollection<Product> products;
 
 	public ObservableCollection<Product> Products
 	{
@@ -35,22 +35,22 @@ internal class ProductsViewModel : ViewModelBase
 		}
 	}
 
-	public ICommand AddCommand { get; set; }
-
-
 	public ProductsViewModel(INavigationService navigationService)
 	{
-		dbContext = new WpmDbContext();
-		dbContext.Categories.Load();
-		AddCommand = new Command(OnAddCommand);
-		Products = new ObservableCollection<Product>(dbContext.Products);
+		//dbContext = new WpmDbContext();
+		//dbContext.Categories.Load();
+		//Products = new ObservableCollection<Product>(dbContext.Products.ToImmutableList());
+		//dbContext.Dispose();
+		//PropertyChanged += ProductsViewModel_PropertyChanged;
+		//this.navigationService = navigationService;
 	}
 
-	private void OnAddCommand()
+	private async void ProductsViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 	{
-		var nextId = dbContext.Products.Max(p => p.Id) + 1;
-		dbContext.Products.Add(new Product(nextId, Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), 100, 1));
-		dbContext.SaveChanges();
-        Products = new ObservableCollection<Product>(dbContext.Products);
-    }
+		if (e.PropertyName == nameof(SelectedProduct))
+		{
+            var uri = $"{nameof(ProductDetailsPage)}?id={SelectedProduct.Id}";
+            await navigationService.GoToAsync(uri);
+        }
+	}
 }

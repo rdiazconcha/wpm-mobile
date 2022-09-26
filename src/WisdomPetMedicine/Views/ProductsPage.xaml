@@ -3,7 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WisdomPetMedicine.Views.ProductsPage"
              xmlns:vm="clr-namespace:WisdomPetMedicine.ViewModels"
+             xmlns:design="http://schemas.microsoft.com/expression/blend/2008"
+             x:DataType="vm:ProductsViewModel"
              Title="ProductsPage">
-    <VerticalStackLayout x:Name="data" />
+
+    <CollectionView ItemsSource="{Binding Products}"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                    SelectionMode="Single"
+                    />
 
 </ContentPage>

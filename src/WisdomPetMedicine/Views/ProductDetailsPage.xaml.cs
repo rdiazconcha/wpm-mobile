@@ -1,10 +1,11 @@
 using WisdomPetMedicine.DataAccess;
+using WisdomPetMedicine.Services;
 
 namespace WisdomPetMedicine.Views;
 
 public partial class ProductDetailsPage : ContentPage, IQueryAttributable
 {
-	public ProductDetailsPage()
+	public ProductDetailsPage(INavigationService ns)
 	{
 		InitializeComponent();
 	}

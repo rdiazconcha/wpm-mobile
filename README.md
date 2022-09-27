@@ -1,1 +1,1 @@
-# wpm-mobile
+# .NET MAUI esencial

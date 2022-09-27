@@ -11,9 +11,19 @@ public static class MauiAppBuilderExtensions
         builder.Services.AddSingleton<INavigationService, NavigationService>();
         builder.Services.AddTransient<VisitsViewModel>();
         builder.Services.AddTransient<VisitsPage>();
-        builder.Services.AddTransient<VisitDetailsViewModel>();
         builder.Services.AddTransient<VisitDetailsPage>();
-        builder.Services.AddSingleton<IPath, DbPath>();
+        builder.Services.AddTransient<VisitDetailsViewModel>();
+        builder.Services.AddTransient<ClientsPage>();
+        builder.Services.AddTransient<ClientsViewModel>();
+        builder.Services.AddTransient<ProductsPage>();
+        builder.Services.AddTransient<ProductsViewModel>();
+        builder.Services.AddTransient<ProductDetailsPage>();
+        builder.Services.AddTransient<ProductDetailsViewModel>();
+        builder.Services.AddTransient<DashboardPage>();
+        builder.Services.AddTransient<DashboardViewModel>();
+        builder.Services.AddSingleton(Connectivity.Current);
+        builder.Services.AddSingleton<SyncService>();
+        builder.Services.AddSingleton<IDatabasePathService, DatabasePathService>();
         builder.Services.AddDbContext<WpmOutDbContext>();
 
         var dbContext = new WpmDbContext();

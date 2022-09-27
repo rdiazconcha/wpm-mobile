@@ -1,24 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WisdomPetMedicine.Services;
 
 namespace WisdomPetMedicine.DataAccess;
 public class WpmOutDbContext : DbContext
 {
-    private readonly IPath path;
-    public DbSet<Sale> Sales { get; set; }
+    private readonly IDatabasePathService databasePathService;
 
-    public WpmOutDbContext(IPath path, DbContextOptions<WpmOutDbContext> options)
-        : base(options)
+    public DbSet<SaleItem> Sales { get; set; }
+
+    public WpmOutDbContext(IDatabasePathService databasePathService)
     {
-        this.path = path;
+        this.databasePathService = databasePathService;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString = $"Filename={path.GetDatabasePath()}";
+        var connectionString = $"Filename={databasePathService.Get("wpm.db")}";
         optionsBuilder.UseSqlite(connectionString);
     }
 }
-public record Sale(int ClientId, int ProductId, int Quantity, decimal Amount)
+
+public record SaleItem(int ClientId, 
+    int ProductId, int Quantity, decimal Price)
 {
     public int Id { get; set; }
 }

@@ -2,9 +2,9 @@ using WisdomPetMedicine.ViewModels;
 
 namespace WisdomPetMedicine.Views;
 
-public partial class ProductsPage : ContentPage
+public partial class DashboardPage : ContentPage
 {
-	public ProductsPage(ProductsViewModel viewModel)
+	public DashboardPage(DashboardViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

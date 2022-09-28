@@ -56,6 +56,7 @@
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.9" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.9" />
+	  <PackageReference Include="Microsoft.Identity.Client" Version="4.47.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,6 +85,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ProductsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SyncPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\VisitDetailsPage.xaml">
